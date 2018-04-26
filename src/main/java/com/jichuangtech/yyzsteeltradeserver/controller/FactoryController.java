@@ -30,7 +30,7 @@ public class FactoryController {
         LOGGER.info(TAG, " factory data: list");
         Response<List<FactoryEntity>> response = new Response<>();
         response.data = mFactoryRepository.findAll();
-        LOGGER.info(TAG, " factory data: " + response.data);
+        LOGGER.info(" factory data: " + response.data);
         if(response.data == null) {
             response.setStatusCode(ResponseCode.CODE_GOODS_GET_ALL_ERROR);
         }
