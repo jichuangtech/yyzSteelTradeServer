@@ -7,9 +7,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jichuangtech.clothshopserver.controller.UserController;
-import com.jichuangtech.clothshopserver.model.Page;
-import com.jichuangtech.clothshopserver.utils.PaginationUtils;
 import junit.framework.TestCase;
 
 import org.slf4j.Logger;
@@ -56,7 +53,7 @@ public class ClientCallTest extends TestCase{
     }*/  
     
     public void testUpdateOrderStatus() throws IOException, URISyntaxException {  
-        String url = "http://localhost:8080/clothshopserver/api/order/16777215/orderstatus/8/2";  
+        String url = "http://localhost:8080/yyzsteeltradeserver/api/order/16777215/orderstatus/8/2";
         ClientHttpRequest request = new SimpleClientHttpRequestFactory().createRequest(new URI(url), HttpMethod.POST); 
         request.getHeaders().set("Accept", "application/json");  
         request.getHeaders().set("Content-Type", "application/json;UTF-8"); 
