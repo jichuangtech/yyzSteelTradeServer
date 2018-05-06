@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FactoryRepository extends JpaRepository<FactoryEntity, Integer>{
+    FactoryEntity findById(int id);
 }

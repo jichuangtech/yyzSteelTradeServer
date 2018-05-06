@@ -36,4 +36,16 @@ public class FactoryController {
         }
         return response;
     }
+
+    @RequestMapping(value = "/{factoryId}", method = RequestMethod.GET)
+    public Response<FactoryEntity> listById(@PathVariable int factoryId) {
+        LOGGER.info(" factory listById  factoryId: " + factoryId);
+        Response<FactoryEntity> response = new Response<>();
+        response.data = mFactoryRepository.findById(factoryId);
+        LOGGER.info(" factory listById data: " + response.data);
+        if(response.data == null) {
+            response.setStatusCode(ResponseCode.CODE_GOODS_GET_ALL_ERROR);
+        }
+        return response;
+    }
 }

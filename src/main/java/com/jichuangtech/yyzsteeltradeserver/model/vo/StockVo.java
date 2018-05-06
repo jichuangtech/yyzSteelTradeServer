@@ -1,5 +1,7 @@
 package com.jichuangtech.yyzsteeltradeserver.model.vo;
 
+import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
@@ -10,6 +12,7 @@ public class StockVo {
     private int number;
     private int offset;
     private int factoryId;
+    private int rest;
 
     public String getContractNo() {
         return contractNo;
@@ -59,6 +62,14 @@ public class StockVo {
         this.factoryId = factoryId;
     }
 
+    public int getRest() {
+        return rest;
+    }
+
+    public void setRest(int rest) {
+        this.rest = rest;
+    }
+
     @Override
     public String toString() {
         return "StockVo{" +
@@ -68,6 +79,7 @@ public class StockVo {
                 ", number=" + number +
                 ", offset=" + offset +
                 ", factoryId=" + factoryId +
+                ", rest=" + rest +
                 '}';
     }
 }

@@ -14,6 +14,7 @@ public class StockEntity {
     private Timestamp datetime;
     private int price;
     private int number;
+    private int rest;
     private int offset;
     private List<OrderGoodsEntity> orderGoodsList;
     private Integer factoryId;
@@ -69,6 +70,16 @@ public class StockEntity {
     }
 
     @Basic
+    @Column(name = "rest", nullable = false)
+    public int getRest() {
+        return rest;
+    }
+
+    public void setRest(int rest) {
+        this.rest = rest;
+    }
+
+    @Basic
     @Column(name = "offset", nullable = false)
     public int getOffset() {
         return offset;
@@ -106,6 +117,7 @@ public class StockEntity {
         if (getId() != that.getId()) return false;
         if (getPrice() != that.getPrice()) return false;
         if (getNumber() != that.getNumber()) return false;
+        if (getRest() != that.getRest()) return false;
         if (getOffset() != that.getOffset()) return false;
         if (getContractNo() != null ? !getContractNo().equals(that.getContractNo()) : that.getContractNo() != null)
             return false;
@@ -123,24 +135,26 @@ public class StockEntity {
         result = 31 * result + (getDatetime() != null ? getDatetime().hashCode() : 0);
         result = 31 * result + getPrice();
         result = 31 * result + getNumber();
+        result = 31 * result + getRest();
         result = 31 * result + getOffset();
         result = 31 * result + (getOrderGoodsList() != null ? getOrderGoodsList().hashCode() : 0);
         result = 31 * result + (getFactoryId() != null ? getFactoryId().hashCode() : 0);
         return result;
     }
 
+
     @Override
     public String toString() {
         return "StockEntity{" +
-                "id:" + id +
-                ", contractNo:'" + contractNo +
-                ", datetime:" + datetime +
-                ", datetimeZN:" + DateUtils.getSimpleDate(datetime) +
-                ", price:" + price +
-                ", number:" + number +
-                ", offset:" + offset +
-                ", orderGoodsList:" + orderGoodsList +
-                ", factoryId:" + factoryId +
+                "id=" + id +
+                ", contractNo='" + contractNo + '\'' +
+                ", datetime=" + datetime +
+                ", price=" + price +
+                ", number=" + number +
+                ", rest=" + rest +
+                ", offset=" + offset +
+                ", orderGoodsList=" + orderGoodsList +
+                ", factoryId=" + factoryId +
                 '}';
     }
 }

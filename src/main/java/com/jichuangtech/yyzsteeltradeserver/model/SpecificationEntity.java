@@ -114,4 +114,16 @@ public class SpecificationEntity {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "SpecificationEntity{" +
+                "id=" + id +
+                ", diameter='" + diameter + '\'' +
+                ", length='" + length + '\'' +
+                ", weight=" + weight +
+                ", number=" + number +
+                ", offsetPrice=" + offsetPrice +
+                ", factoryId=" + factoryId +
+                '}';
+    }
 }

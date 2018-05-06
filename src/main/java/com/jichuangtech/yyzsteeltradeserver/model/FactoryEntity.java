@@ -1,7 +1,5 @@
 package com.jichuangtech.yyzsteeltradeserver.model;
 
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +8,7 @@ import java.util.List;
 public class FactoryEntity {
     private int id;
     private String name;
-    private List<SpecificationEntity> sepcList;
+    private List<SpecificationEntity> specList;
     private List<StockEntity> stockList;
 
     @Id
@@ -54,12 +52,12 @@ public class FactoryEntity {
     }
 
     @OneToMany(mappedBy = "factoryId", fetch = FetchType.EAGER)
-    public List<SpecificationEntity> getSepcList() {
-        return sepcList;
+    public List<SpecificationEntity> getSpecList() {
+        return specList;
     }
 
-    public void setSepcList(List<SpecificationEntity> sepcList) {
-        this.sepcList = sepcList;
+    public void setSpecList(List<SpecificationEntity> specList) {
+        this.specList = specList;
     }
 
     @OneToMany(mappedBy = "factoryId", fetch = FetchType.EAGER)
@@ -69,5 +67,15 @@ public class FactoryEntity {
 
     public void setStockList(List<StockEntity> stockList) {
         this.stockList = stockList;
+    }
+
+    @Override
+    public String toString() {
+        return "FactoryEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sepcList=" + specList +
+                ", stockList=" + stockList +
+                '}';
     }
 }

@@ -14,6 +14,7 @@ import com.jichuangtech.yyzsteeltradeserver.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +47,23 @@ public class StockController {
         return response;
     }
 
+    @RequestMapping(value = "/withFactoryId/{factoryId}", method = RequestMethod.GET)
+    public Response<List<StockEntity>> listByFactoryId(@PathVariable int factoryId) {
+        LOGGER.info(" listByFactoryId factoryId: " + factoryId);
+        Response<List<StockEntity>> response = new Response<>();
+
+        if(-1 == factoryId) {
+            response.data = mStockRepository.findAll();
+        } else {
+            response.data = mStockRepository.findAllByFactoryId(factoryId);
+        }
+
+        if(response.data == null) {
+            response.setStatusCode(ResponseCode.CODE_GOODS_CATEGORY_GET_ERROR);
+        }
+        return response;
+    }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public Response<List<FactoryEntity>> saveStock(StockVo stockVo) {
@@ -57,6 +75,7 @@ public class StockController {
         entity.setPrice(stockVo.getPrice());
         entity.setDatetime(new Timestamp(stockVo.getTimestamp()));
         entity.setNumber(stockVo.getNumber());
+        entity.setRest(stockVo.getRest());
         entity.setOffset(stockVo.getOffset());
         entity.setFactoryId(stockVo.getFactoryId());
 
