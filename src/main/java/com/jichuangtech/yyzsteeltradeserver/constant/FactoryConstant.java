@@ -5,6 +5,4 @@ package com.jichuangtech.yyzsteeltradeserver.constant;
  */
 public class FactoryConstant {
     public static final String API_FACTORY = Constant.API + "/factory";
-
-    public static final String VIEW_PRODUCT_TYPE = "/productTypeView";
 }

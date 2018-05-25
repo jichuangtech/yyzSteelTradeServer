@@ -2,6 +2,7 @@ package com.jichuangtech.yyzsteeltradeserver.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "Specification", schema = "steelTrade", catalog = "")
@@ -13,6 +14,7 @@ public class SpecificationEntity {
     private int number;
     private int offsetPrice;
     private Integer factoryId;
+    private List<GoodsEntity> goods;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -82,6 +84,15 @@ public class SpecificationEntity {
 
     public void setFactoryId(Integer factoryId) {
         this.factoryId = factoryId;
+    }
+
+    @OneToMany(mappedBy = "specificationId" ,fetch = FetchType.EAGER)
+    public List<GoodsEntity> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<GoodsEntity> goods) {
+        this.goods = goods;
     }
 
     @Override

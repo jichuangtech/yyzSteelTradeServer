@@ -5,10 +5,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "OrderGoods", schema = "steelTrade", catalog = "")
 public class OrderGoodsEntity {
+    @Id
     private int id;
     private int goodsId;
+    private int stockId;
     private int carId;
-    private StockEntity stock;
+    private int orderId;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -31,6 +33,16 @@ public class OrderGoodsEntity {
     }
 
     @Basic
+    @Column(name = "stockId", nullable = false)
+    public int getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(int stockId) {
+        this.stockId = stockId;
+    }
+
+    @Basic
     @Column(name = "carId", nullable = false)
     public int getCarId() {
         return carId;
@@ -40,35 +52,13 @@ public class OrderGoodsEntity {
         this.carId = carId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OrderGoodsEntity that = (OrderGoodsEntity) o;
-
-        if (id != that.id) return false;
-        if (goodsId != that.goodsId) return false;
-        if (carId != that.carId) return false;
-
-        return true;
+    @Basic
+    @Column(name = "orderId", nullable = false)
+    public int getOrderId() {
+        return orderId;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + goodsId;
-        result = 31 * result + carId;
-        return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "stockId", referencedColumnName = "id", nullable = false)
-    public StockEntity getStock() {
-        return stock;
-    }
-
-    public void setStock(StockEntity stock) {
-        this.stock = stock;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }
