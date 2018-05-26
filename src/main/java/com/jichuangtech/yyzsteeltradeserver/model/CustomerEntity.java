@@ -9,7 +9,7 @@ public class CustomerEntity {
     private int id;
     private String username;
     private String telephone;
-    private List<OrderEntity> orders;
+    private List<OrderEntity> orderList;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -63,12 +63,12 @@ public class CustomerEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "customerId", fetch = FetchType.EAGER)
-    public List<OrderEntity> getOrders() {
-        return orders;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    public List<OrderEntity> getOrderList() {
+        return orderList;
     }
 
-    public void setOrders(List<OrderEntity> orders) {
-        this.orders = orders;
+    public void setOrderList(List<OrderEntity> orderList) {
+        this.orderList = orderList;
     }
 }

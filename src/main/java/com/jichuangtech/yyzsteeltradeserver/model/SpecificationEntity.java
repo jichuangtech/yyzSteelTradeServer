@@ -13,8 +13,8 @@ public class SpecificationEntity {
     private BigDecimal weight;
     private int number;
     private int offsetPrice;
-    private Integer factoryId;
-    private List<GoodsEntity> goods;
+    private List<GoodsEntity> goodsList;
+    private FactoryEntity factory;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -76,39 +76,19 @@ public class SpecificationEntity {
         this.offsetPrice = offsetPrice;
     }
 
-    @Basic
-    @Column(name = "factoryId", nullable = true)
-    public Integer getFactoryId() {
-        return factoryId;
-    }
-
-    public void setFactoryId(Integer factoryId) {
-        this.factoryId = factoryId;
-    }
-
-    @OneToMany(mappedBy = "specificationId" ,fetch = FetchType.EAGER)
-    public List<GoodsEntity> getGoods() {
-        return goods;
-    }
-
-    public void setGoods(List<GoodsEntity> goods) {
-        this.goods = goods;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SpecificationEntity that = (SpecificationEntity) o;
+        SpecificationEntity entity = (SpecificationEntity) o;
 
-        if (id != that.id) return false;
-        if (number != that.number) return false;
-        if (offsetPrice != that.offsetPrice) return false;
-        if (diameter != null ? !diameter.equals(that.diameter) : that.diameter != null) return false;
-        if (length != null ? !length.equals(that.length) : that.length != null) return false;
-        if (weight != null ? !weight.equals(that.weight) : that.weight != null) return false;
-        if (factoryId != null ? !factoryId.equals(that.factoryId) : that.factoryId != null) return false;
+        if (id != entity.id) return false;
+        if (number != entity.number) return false;
+        if (offsetPrice != entity.offsetPrice) return false;
+        if (diameter != null ? !diameter.equals(entity.diameter) : entity.diameter != null) return false;
+        if (length != null ? !length.equals(entity.length) : entity.length != null) return false;
+        if (weight != null ? !weight.equals(entity.weight) : entity.weight != null) return false;
 
         return true;
     }
@@ -121,20 +101,25 @@ public class SpecificationEntity {
         result = 31 * result + (weight != null ? weight.hashCode() : 0);
         result = 31 * result + number;
         result = 31 * result + offsetPrice;
-        result = 31 * result + (factoryId != null ? factoryId.hashCode() : 0);
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "SpecificationEntity{" +
-                "id=" + id +
-                ", diameter='" + diameter + '\'' +
-                ", length='" + length + '\'' +
-                ", weight=" + weight +
-                ", number=" + number +
-                ", offsetPrice=" + offsetPrice +
-                ", factoryId=" + factoryId +
-                '}';
+    @OneToMany(mappedBy = "specification", fetch = FetchType.EAGER)
+    public List<GoodsEntity> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<GoodsEntity> goodsList) {
+        this.goodsList = goodsList;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "factoryId", referencedColumnName = "id")
+    public FactoryEntity getFactory() {
+        return factory;
+    }
+
+    public void setFactory(FactoryEntity factory) {
+        this.factory = factory;
     }
 }

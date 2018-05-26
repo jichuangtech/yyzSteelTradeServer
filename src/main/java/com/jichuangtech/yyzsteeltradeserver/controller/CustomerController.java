@@ -1,12 +1,9 @@
 package com.jichuangtech.yyzsteeltradeserver.controller;
 
-import com.jichuangtech.yyzsteeltradeserver.constant.CarConstant;
 import com.jichuangtech.yyzsteeltradeserver.constant.CustomerConstant;
 import com.jichuangtech.yyzsteeltradeserver.constant.ResponseCode;
-import com.jichuangtech.yyzsteeltradeserver.model.CarEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.CustomerEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
-import com.jichuangtech.yyzsteeltradeserver.repository.CarRepository;
 import com.jichuangtech.yyzsteeltradeserver.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

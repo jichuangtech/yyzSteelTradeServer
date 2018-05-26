@@ -1,13 +1,11 @@
 package com.jichuangtech.yyzsteeltradeserver.controller;
 
-import com.jichuangtech.yyzsteeltradeserver.constant.FactoryConstant;
 import com.jichuangtech.yyzsteeltradeserver.constant.ResponseCode;
 import com.jichuangtech.yyzsteeltradeserver.constant.SpecificationConstant;
 import com.jichuangtech.yyzsteeltradeserver.model.FactoryEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
 import com.jichuangtech.yyzsteeltradeserver.model.SpecificationEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.vo.SpecificationVo;
-import com.jichuangtech.yyzsteeltradeserver.repository.FactoryRepository;
 import com.jichuangtech.yyzsteeltradeserver.repository.SpecificationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +63,6 @@ public class SpecificationController {
         entity.setWeight(specVo.getWeight());
         entity.setNumber(specVo.getNumber());
         entity.setOffsetPrice(specVo.getOffsetPrice());
-        entity.setFactoryId(specVo.getFactoryId());
 
         mSpecRepository.save(entity);
         return response;

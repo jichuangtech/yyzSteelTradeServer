@@ -1,7 +1,5 @@
 package com.jichuangtech.yyzsteeltradeserver.model;
 
-import com.jichuangtech.yyzsteeltradeserver.utils.DateUtils;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,10 +12,10 @@ public class StockEntity {
     private Timestamp datetime;
     private int price;
     private int number;
-    private int rest;
     private int offset;
+    private int rest;
     private List<OrderGoodsEntity> orderGoodsList;
-    private Integer factoryId;
+    private FactoryEntity factory;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -70,16 +68,6 @@ public class StockEntity {
     }
 
     @Basic
-    @Column(name = "rest", nullable = false)
-    public int getRest() {
-        return rest;
-    }
-
-    public void setRest(int rest) {
-        this.rest = rest;
-    }
-
-    @Basic
     @Column(name = "offset", nullable = false)
     public int getOffset() {
         return offset;
@@ -89,13 +77,44 @@ public class StockEntity {
         this.offset = offset;
     }
 
-    @Column(name = "factoryId", nullable = true)
-    public Integer getFactoryId() {
-        return factoryId;
+    @Basic
+    @Column(name = "rest", nullable = false)
+    public int getRest() {
+        return rest;
     }
 
-    public void setFactoryId(Integer factoryId) {
-        this.factoryId = factoryId;
+    public void setRest(int rest) {
+        this.rest = rest;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StockEntity that = (StockEntity) o;
+
+        if (id != that.id) return false;
+        if (price != that.price) return false;
+        if (number != that.number) return false;
+        if (offset != that.offset) return false;
+        if (rest != that.rest) return false;
+        if (contractNo != null ? !contractNo.equals(that.contractNo) : that.contractNo != null) return false;
+        if (datetime != null ? !datetime.equals(that.datetime) : that.datetime != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (contractNo != null ? contractNo.hashCode() : 0);
+        result = 31 * result + (datetime != null ? datetime.hashCode() : 0);
+        result = 31 * result + price;
+        result = 31 * result + number;
+        result = 31 * result + offset;
+        result = 31 * result + rest;
+        return result;
     }
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.EAGER)
@@ -107,54 +126,13 @@ public class StockEntity {
         this.orderGoodsList = orderGoodsList;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof StockEntity)) return false;
-
-        StockEntity that = (StockEntity) o;
-
-        if (getId() != that.getId()) return false;
-        if (getPrice() != that.getPrice()) return false;
-        if (getNumber() != that.getNumber()) return false;
-        if (getRest() != that.getRest()) return false;
-        if (getOffset() != that.getOffset()) return false;
-        if (getContractNo() != null ? !getContractNo().equals(that.getContractNo()) : that.getContractNo() != null)
-            return false;
-        if (getDatetime() != null ? !getDatetime().equals(that.getDatetime()) : that.getDatetime() != null)
-            return false;
-        if (getOrderGoodsList() != null ? !getOrderGoodsList().equals(that.getOrderGoodsList()) : that.getOrderGoodsList() != null)
-            return false;
-        return getFactoryId() != null ? getFactoryId().equals(that.getFactoryId()) : that.getFactoryId() == null;
+    @ManyToOne
+    @JoinColumn(name = "factoryId", referencedColumnName = "id", nullable = false)
+    public FactoryEntity getFactory() {
+        return factory;
     }
 
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getContractNo() != null ? getContractNo().hashCode() : 0);
-        result = 31 * result + (getDatetime() != null ? getDatetime().hashCode() : 0);
-        result = 31 * result + getPrice();
-        result = 31 * result + getNumber();
-        result = 31 * result + getRest();
-        result = 31 * result + getOffset();
-        result = 31 * result + (getOrderGoodsList() != null ? getOrderGoodsList().hashCode() : 0);
-        result = 31 * result + (getFactoryId() != null ? getFactoryId().hashCode() : 0);
-        return result;
-    }
-
-
-    @Override
-    public String toString() {
-        return "StockEntity{" +
-                "id=" + id +
-                ", contractNo='" + contractNo + '\'' +
-                ", datetime=" + datetime +
-                ", price=" + price +
-                ", number=" + number +
-                ", rest=" + rest +
-                ", offset=" + offset +
-                ", orderGoodsList=" + orderGoodsList +
-                ", factoryId=" + factoryId +
-                '}';
+    public void setFactory(FactoryEntity factory) {
+        this.factory = factory;
     }
 }

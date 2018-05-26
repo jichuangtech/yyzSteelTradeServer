@@ -41,16 +41,6 @@ public class CarEntity {
         this.telephone = telephone;
     }
 
-    @OneToMany(mappedBy = "carId", fetch = FetchType.EAGER)
-    public List<OrderGoodsEntity> getOrderGoodsList() {
-        return orderGoodsList;
-    }
-
-    public void setOrderGoodsList(List<OrderGoodsEntity> orderGoodsList) {
-        this.orderGoodsList = orderGoodsList;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,5 +61,14 @@ public class CarEntity {
         result = 31 * result + (carLicense != null ? carLicense.hashCode() : 0);
         result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
+    public List<OrderGoodsEntity> getOrderGoodsList() {
+        return orderGoodsList;
+    }
+
+    public void setOrderGoodsList(List<OrderGoodsEntity> orderGoodsList) {
+        this.orderGoodsList = orderGoodsList;
     }
 }

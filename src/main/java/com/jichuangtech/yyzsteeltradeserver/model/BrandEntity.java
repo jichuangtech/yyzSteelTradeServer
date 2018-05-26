@@ -1,15 +1,13 @@
 package com.jichuangtech.yyzsteeltradeserver.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "Factory", schema = "steelTrade", catalog = "")
-public class FactoryEntity {
+@Table(name = "Brand", schema = "steelTrade", catalog = "")
+public class BrandEntity {
     private int id;
     private String name;
-    private List<StockEntity> stockList;
-    private List<SpecificationEntity> specificationList;
+    private int price;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -31,14 +29,25 @@ public class FactoryEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "price", nullable = false)
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FactoryEntity that = (FactoryEntity) o;
+        BrandEntity that = (BrandEntity) o;
 
         if (id != that.id) return false;
+        if (price != that.price) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -48,24 +57,7 @@ public class FactoryEntity {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + price;
         return result;
-    }
-
-    @OneToMany(mappedBy = "factory", fetch = FetchType.EAGER)
-    public List<StockEntity> getStockList() {
-        return stockList;
-    }
-
-    public void setStockList(List<StockEntity> stockList) {
-        this.stockList = stockList;
-    }
-
-    @OneToMany(mappedBy = "factory", fetch = FetchType.EAGER)
-    public List<SpecificationEntity> getSpecificationList() {
-        return specificationList;
-    }
-
-    public void setSpecificationList(List<SpecificationEntity> specificationList) {
-        this.specificationList = specificationList;
     }
 }

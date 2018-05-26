@@ -5,12 +5,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "OrderGoods", schema = "steelTrade", catalog = "")
 public class OrderGoodsEntity {
-    @Id
     private int id;
-    private int goodsId;
-    private int stockId;
-    private int carId;
-    private int orderId;
+    private OrderEntity orderEntity;
+    private GoodsEntity goods;
+    private CarEntity car;
+    private StockEntity stock;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -22,43 +21,60 @@ public class OrderGoodsEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "goodsId", nullable = false)
-    public int getGoodsId() {
-        return goodsId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderGoodsEntity that = (OrderGoodsEntity) o;
+
+        if (id != that.id) return false;
+
+        return true;
     }
 
-    public void setGoodsId(int goodsId) {
-        this.goodsId = goodsId;
+    @Override
+    public int hashCode() {
+        return id;
     }
 
-    @Basic
-    @Column(name = "stockId", nullable = false)
-    public int getStockId() {
-        return stockId;
+    @ManyToOne
+    @JoinColumn(name = "orderId", referencedColumnName = "id", nullable = false)
+    public OrderEntity getOrderEntity() {
+        return orderEntity;
     }
 
-    public void setStockId(int stockId) {
-        this.stockId = stockId;
+    public void setOrderEntity(OrderEntity order) {
+        this.orderEntity = order;
     }
 
-    @Basic
-    @Column(name = "carId", nullable = false)
-    public int getCarId() {
-        return carId;
+    @ManyToOne
+    @JoinColumn(name = "goodsId", referencedColumnName = "id", nullable = false)
+    public GoodsEntity getGoods() {
+        return goods;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setGoods(GoodsEntity goods) {
+        this.goods = goods;
     }
 
-    @Basic
-    @Column(name = "orderId", nullable = false)
-    public int getOrderId() {
-        return orderId;
+    @ManyToOne
+    @JoinColumn(name = "carId", referencedColumnName = "id", nullable = false)
+    public CarEntity getCar() {
+        return car;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setCar(CarEntity car) {
+        this.car = car;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "stockId", referencedColumnName = "id", nullable = false)
+    public StockEntity getStock() {
+        return stock;
+    }
+
+    public void setStock(StockEntity stock) {
+        this.stock = stock;
     }
 }

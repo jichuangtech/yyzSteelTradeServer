@@ -1,13 +1,10 @@
 package com.jichuangtech.yyzsteeltradeserver.controller;
 
 import com.jichuangtech.yyzsteeltradeserver.constant.CarConstant;
-import com.jichuangtech.yyzsteeltradeserver.constant.FactoryConstant;
 import com.jichuangtech.yyzsteeltradeserver.constant.ResponseCode;
 import com.jichuangtech.yyzsteeltradeserver.model.CarEntity;
-import com.jichuangtech.yyzsteeltradeserver.model.FactoryEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
 import com.jichuangtech.yyzsteeltradeserver.repository.CarRepository;
-import com.jichuangtech.yyzsteeltradeserver.repository.FactoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

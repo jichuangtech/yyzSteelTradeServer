@@ -1,13 +1,10 @@
 package com.jichuangtech.yyzsteeltradeserver.controller;
 
-import com.jichuangtech.yyzsteeltradeserver.constant.FactoryConstant;
 import com.jichuangtech.yyzsteeltradeserver.constant.ResponseCode;
 import com.jichuangtech.yyzsteeltradeserver.constant.StockConstant;
 import com.jichuangtech.yyzsteeltradeserver.model.FactoryEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
-import com.jichuangtech.yyzsteeltradeserver.model.SpecificationEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.StockEntity;
-import com.jichuangtech.yyzsteeltradeserver.model.vo.SpecificationVo;
 import com.jichuangtech.yyzsteeltradeserver.model.vo.StockVo;
 import com.jichuangtech.yyzsteeltradeserver.repository.FactoryRepository;
 import com.jichuangtech.yyzsteeltradeserver.repository.StockRepository;
@@ -33,6 +30,8 @@ public class StockController {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockController.class);
     @Autowired
     private StockRepository mStockRepository;
+
+    private FactoryRepository mFactoryRepository;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -77,7 +76,7 @@ public class StockController {
         entity.setNumber(stockVo.getNumber());
         entity.setRest(stockVo.getRest());
         entity.setOffset(stockVo.getOffset());
-        entity.setFactoryId(stockVo.getFactoryId());
+        entity.setFactory(mFactoryRepository.findById(stockVo.getFactoryId()));
 
         mStockRepository.save(entity);
         return response;
