@@ -63,12 +63,22 @@ public class CarEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "car")
     public List<OrderGoodsEntity> getOrderGoodsList() {
         return orderGoodsList;
     }
 
     public void setOrderGoodsList(List<OrderGoodsEntity> orderGoodsList) {
         this.orderGoodsList = orderGoodsList;
+    }
+
+    @Override
+    public String toString() {
+        return "CarEntity{" +
+                "id=" + id +
+                ", carLicense='" + carLicense + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", orderGoodsList=" + orderGoodsList +
+                '}';
     }
 }
