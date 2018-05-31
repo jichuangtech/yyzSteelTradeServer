@@ -20,14 +20,14 @@
 
     <!-- 解决懒加载 -->
     <!--<filter>-->
-        <!--<filter-name>hibernateFilter</filter-name>-->
-        <!--<filter-class>-->
-            <!--com.jichuangtech.yyzsteeltradeserver.session.MyOpenSessionInViewFilter-->
-        <!--</filter-class>-->
+    <!--<filter-name>hibernateFilter</filter-name>-->
+    <!--<filter-class>-->
+    <!--com.jichuangtech.yyzsteeltradeserver.session.MyOpenSessionInViewFilter-->
+    <!--</filter-class>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-        <!--<filter-name>hibernateFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
+    <!--<filter-name>hibernateFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
     <!--</filter-mapping>-->
     <!-- 解决懒加载 -->
 
@@ -35,7 +35,6 @@
         <filter-name>encodingFilter</filter-name>
         <filter-class>
             org.springframework.web.filter.CharacterEncodingFilter
-            <!--com.jichuangtech.yyzsteeltradeserver.seesion.MyOpenSessionInViewFilter-->
         </filter-class>
         <init-param>
             <param-name>encoding</param-name>
@@ -77,4 +76,34 @@
         <filter-name>DelegatingFilterProxy</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
+
+    <!-- 解决懒加载问题 -->
+
+    <filter>
+        <filter-name>OpenEntityManagerInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+        <init-param>
+            <!-- 指定org.springframework.orm.jpa.LocalEntityManagerFactoryBean在spring配置文件中的名称,默认值为entityManagerFactory
+                如果LocalEntityManagerFactoryBean在spring中的名称不是entityManagerFactory,该参数一定要指定,否则会出现找不到entityManagerFactory的例外 -->
+            <param-name>entityManagerFactoryBeanName</param-name>
+            <param-value>entityManagerFactory</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenEntityManagerInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 解决懒加载问题 -->
+
 </web-app>

@@ -8,11 +8,11 @@ import java.util.Collection;
 import java.util.List;
 
 @SuppressWarnings("rawtypes")
-public final class DomainCopyUtil {
+public final class DozerUtil {
     /**
      * 持有Dozer单例, 避免重复创建DozerMapper消耗资源.
      */
-    private DomainCopyUtil() {
+    private DozerUtil() {
     }
 
     private static DozerBeanMapper dozerMAPPER;

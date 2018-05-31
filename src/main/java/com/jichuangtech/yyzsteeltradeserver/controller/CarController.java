@@ -4,10 +4,13 @@ import com.jichuangtech.yyzsteeltradeserver.constant.CarConstant;
 import com.jichuangtech.yyzsteeltradeserver.constant.ResponseCode;
 import com.jichuangtech.yyzsteeltradeserver.model.CarEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
+import com.jichuangtech.yyzsteeltradeserver.model.vo.CarVo;
 import com.jichuangtech.yyzsteeltradeserver.repository.CarRepository;
+import com.jichuangtech.yyzsteeltradeserver.utils.DozerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +31,13 @@ public class CarController {
     private CarRepository mCarRepository;
 
 
+    @Transactional
     @RequestMapping(method = RequestMethod.GET)
-    public Response<List<CarEntity>> list() {
+    public Response<List<CarVo>> list() {
         LOGGER.info(TAG, " car data: list");
-        Response<List<CarEntity>> response = new Response<>();
-        response.data = mCarRepository.findAll();
+
+        Response<List<CarVo>> response = new Response<>();
+        response.data = DozerUtil.mapList(mCarRepository.findAll(), CarVo.class);
         LOGGER.info(" car data: " + response.data);
         if(response.data == null) {
             response.setStatusCode(ResponseCode.CODE_GOODS_GET_ALL_ERROR);
