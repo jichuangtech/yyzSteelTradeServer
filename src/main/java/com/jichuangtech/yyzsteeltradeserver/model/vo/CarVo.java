@@ -9,7 +9,6 @@ public class CarVo {
     private int id;
     private String carLicense;
     private String telephone;
-    private List<OrderGoodsEntity> orderGoodsList;
 
     public int getId() {
         return id;
@@ -35,13 +34,6 @@ public class CarVo {
         this.telephone = telephone;
     }
 
-    public List<OrderGoodsEntity> getOrderGoodsList() {
-        return orderGoodsList;
-    }
-
-    public void setOrderGoodsList(List<OrderGoodsEntity> orderGoodsList) {
-        this.orderGoodsList = orderGoodsList;
-    }
 
     @Override
     public String toString() {
@@ -49,7 +41,6 @@ public class CarVo {
                 "id=" + id +
                 ", carLicense='" + carLicense + '\'' +
                 ", telephone='" + telephone + '\'' +
-                ", orderGoodsList=" + orderGoodsList +
                 '}';
     }
 }

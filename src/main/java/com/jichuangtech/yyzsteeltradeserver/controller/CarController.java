@@ -22,6 +22,7 @@ import java.util.List;
  * Created by Bingo on 2017/7/23.
  */
 
+@Transactional
 @RestController
 @RequestMapping(CarConstant.API_CAR)
 public class CarController {
@@ -31,7 +32,6 @@ public class CarController {
     private CarRepository mCarRepository;
 
 
-    @Transactional
     @RequestMapping(method = RequestMethod.GET)
     public Response<List<CarVo>> list() {
         LOGGER.info(TAG, " car data: list");
