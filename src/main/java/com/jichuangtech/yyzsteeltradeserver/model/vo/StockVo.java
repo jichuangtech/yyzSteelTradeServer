@@ -7,11 +7,9 @@ import java.sql.Timestamp;
 
 public class StockVo {
     private String contractNo;
-    private long timestamp;
     private int price;
     private int number;
     private int offset;
-    private int factoryId;
     private int rest;
 
     public String getContractNo() {
@@ -20,14 +18,6 @@ public class StockVo {
 
     public void setContractNo(String contractNo) {
         this.contractNo = contractNo;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
     }
 
     public int getPrice() {
@@ -54,14 +44,6 @@ public class StockVo {
         this.offset = offset;
     }
 
-    public int getFactoryId() {
-        return factoryId;
-    }
-
-    public void setFactoryId(int factoryId) {
-        this.factoryId = factoryId;
-    }
-
     public int getRest() {
         return rest;
     }
@@ -74,11 +56,9 @@ public class StockVo {
     public String toString() {
         return "StockVo{" +
                 "contractNo='" + contractNo + '\'' +
-                ", timestamp=" + timestamp +
                 ", price=" + price +
                 ", number=" + number +
                 ", offset=" + offset +
-                ", factoryId=" + factoryId +
                 ", rest=" + rest +
                 '}';
     }

@@ -5,6 +5,8 @@ import com.jichuangtech.yyzsteeltradeserver.constant.StockConstant;
 import com.jichuangtech.yyzsteeltradeserver.model.FactoryEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
 import com.jichuangtech.yyzsteeltradeserver.model.StockEntity;
+import com.jichuangtech.yyzsteeltradeserver.model.vo.StockReqVo;
+import com.jichuangtech.yyzsteeltradeserver.model.vo.StockRespVo;
 import com.jichuangtech.yyzsteeltradeserver.model.vo.StockVo;
 import com.jichuangtech.yyzsteeltradeserver.repository.FactoryRepository;
 import com.jichuangtech.yyzsteeltradeserver.repository.StockRepository;
@@ -25,20 +27,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping(StockConstant.API_STOCK)
-public class StockController {
+public class StockController extends BaseController {
     private static final String TAG = StockController.class.getSimpleName();
     private static final Logger LOGGER = LoggerFactory.getLogger(StockController.class);
+
     @Autowired
     private StockRepository mStockRepository;
 
+    @Autowired
     private FactoryRepository mFactoryRepository;
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public Response<List<StockEntity>> list() {
+    public Response<List<StockRespVo>> list() {
         LOGGER.info(TAG, " factory data: list");
-        Response<List<StockEntity>> response = new Response<>();
-        response.data = mStockRepository.findAll();
+        Response<List<StockRespVo>> response = new Response<>();
+        response.data = mapList(mStockRepository.findAll(), StockRespVo.class);
         LOGGER.info(" factory data: " + response.data);
         if(response.data == null) {
             response.setStatusCode(ResponseCode.CODE_GOODS_GET_ALL_ERROR);
@@ -47,17 +51,13 @@ public class StockController {
     }
 
     @RequestMapping(value = "/withFactoryId/{factoryId}", method = RequestMethod.GET)
-    public Response<List<StockEntity>> listByFactoryId(@PathVariable int factoryId) {
+    public Response<List<StockRespVo>> listByFactoryId(@PathVariable int factoryId) {
         LOGGER.info(" listByFactoryId factoryId: " + factoryId);
-        Response<List<StockEntity>> response = new Response<>();
-
-        if(-1 == factoryId) {
-            response.data = mStockRepository.findAll();
+        Response<List<StockRespVo>> response = new Response<>();
+        List<StockEntity> list = -1 == factoryId ? mStockRepository.findAll(): mStockRepository.findAllByFactoryId(factoryId);
+        if(list != null) {
+            response.data = mapList(list, StockRespVo.class);
         } else {
-            response.data = mStockRepository.findAllByFactoryId(factoryId);
-        }
-
-        if(response.data == null) {
             response.setStatusCode(ResponseCode.CODE_GOODS_CATEGORY_GET_ERROR);
         }
         return response;
@@ -65,7 +65,7 @@ public class StockController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public Response<List<FactoryEntity>> saveStock(StockVo stockVo) {
+    public Response<List<FactoryEntity>> saveStock(StockReqVo stockVo) {
         LOGGER.info(" saveStock stockVo： " + stockVo);
         Response response = new Response();
 
