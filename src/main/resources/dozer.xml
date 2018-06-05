@@ -11,6 +11,11 @@
         <class-a>com.jichuangtech.yyzsteeltradeserver.model.CarEntity</class-a>
         <class-b>com.jichuangtech.yyzsteeltradeserver.model.vo.CarVo</class-b>
     </mapping>
+
+    <mapping map-null="false">
+        <class-a>com.jichuangtech.yyzsteeltradeserver.model.FactoryEntity</class-a>
+        <class-b>com.jichuangtech.yyzsteeltradeserver.model.vo.FactoryVo</class-b>
+    </mapping>
 </mappings>
 
    

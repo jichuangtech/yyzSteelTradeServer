@@ -22,10 +22,9 @@ import java.util.List;
  * Created by Bingo on 2017/7/23.
  */
 
-@Transactional
 @RestController
 @RequestMapping(CarConstant.API_CAR)
-public class CarController {
+public class CarController extends BaseController{
     private static final String TAG = CarController.class.getSimpleName();
     private static final Logger LOGGER = LoggerFactory.getLogger(CarController.class);
     @Autowired
@@ -46,14 +45,16 @@ public class CarController {
     }
 
     @RequestMapping(value = "/{carId}", method = RequestMethod.GET)
-    public Response<CarEntity> listById(@PathVariable int carId) {
+    public Response<CarVo> listById(@PathVariable int carId) {
         LOGGER.info(" car listById  carId: " + carId);
-        Response<CarEntity> response = new Response<>();
-        response.data = mCarRepository.findById(carId);
-        LOGGER.info(" car listById data: " + response.data);
-        if(response.data == null) {
+        Response<CarVo> response = new Response<>();
+        CarEntity entity = mCarRepository.findById(carId);
+        if(entity != null) {
+            response.data = mapSingle(mCarRepository.findById(carId), CarVo.class);
+        } else {
             response.setStatusCode(ResponseCode.CODE_GOODS_GET_ALL_ERROR);
         }
+        LOGGER.info(" car listById data: " + response.data);
         return response;
     }
 }
