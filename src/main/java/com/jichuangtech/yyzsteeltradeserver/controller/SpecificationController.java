@@ -5,7 +5,7 @@ import com.jichuangtech.yyzsteeltradeserver.constant.SpecificationConstant;
 import com.jichuangtech.yyzsteeltradeserver.model.FactoryEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
 import com.jichuangtech.yyzsteeltradeserver.model.SpecificationEntity;
-import com.jichuangtech.yyzsteeltradeserver.model.vo.SpecificationVo;
+import com.jichuangtech.yyzsteeltradeserver.model.vo.SpecificationReqVo;
 import com.jichuangtech.yyzsteeltradeserver.repository.SpecificationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +53,7 @@ public class SpecificationController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public Response<List<FactoryEntity>> saveSpec(SpecificationVo specVo) {
+    public Response<List<FactoryEntity>> saveSpec(SpecificationReqVo specVo) {
         LOGGER.info(" saveSpec specVo： " + specVo);
         Response response = new Response();
 

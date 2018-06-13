@@ -3,14 +3,11 @@ package com.jichuangtech.yyzsteeltradeserver.model.vo;
 import java.math.BigDecimal;
 
 public class SpecificationVo {
-
     private String diameter;
     private String length;
     private BigDecimal weight;
     private int number;
     private int offsetPrice;
-    private Integer factoryId;
-
 
     public String getDiameter() {
         return diameter;
@@ -52,14 +49,6 @@ public class SpecificationVo {
         this.offsetPrice = offsetPrice;
     }
 
-    public Integer getFactoryId() {
-        return factoryId;
-    }
-
-    public void setFactoryId(Integer factoryId) {
-        this.factoryId = factoryId;
-    }
-
     @Override
     public String toString() {
         return "SpecificationVo{" +
@@ -68,7 +57,6 @@ public class SpecificationVo {
                 ", weight=" + weight +
                 ", number=" + number +
                 ", offsetPrice=" + offsetPrice +
-                ", factoryId=" + factoryId +
                 '}';
     }
 }

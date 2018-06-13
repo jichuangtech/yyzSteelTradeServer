@@ -4,13 +4,13 @@ import com.jichuangtech.yyzsteeltradeserver.constant.FactoryConstant;
 import com.jichuangtech.yyzsteeltradeserver.constant.ResponseCode;
 import com.jichuangtech.yyzsteeltradeserver.model.FactoryEntity;
 import com.jichuangtech.yyzsteeltradeserver.model.Response;
+import com.jichuangtech.yyzsteeltradeserver.model.vo.FactoryStockVo;
+import com.jichuangtech.yyzsteeltradeserver.model.vo.FactorySpecVo;
 import com.jichuangtech.yyzsteeltradeserver.model.vo.FactoryVo;
 import com.jichuangtech.yyzsteeltradeserver.repository.FactoryRepository;
-import com.jichuangtech.yyzsteeltradeserver.utils.DozerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,6 +52,36 @@ public class FactoryController extends BaseController {
         }
 
         LOGGER.info(" factory listById data: " + response.data);
+        return response;
+    }
+
+    @RequestMapping(value = "/{factoryId}/specification", method = RequestMethod.GET)
+    public Response<FactoryStockVo> listSpecification(@PathVariable int factoryId) {
+        LOGGER.info(" listSpecification factoryId: " + factoryId);
+        Response<FactoryStockVo> response = new Response<>();
+        FactoryEntity entity = mFactoryRepository.findById(factoryId);
+
+        if(entity != null) {
+            response.data = mapSingle(entity, FactoryStockVo.class);
+        } else {
+            response.setStatusCode(ResponseCode.CODE_GOODS_GET_ALL_ERROR);
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "/{factoryId}/stock", method = RequestMethod.GET)
+    public Response<FactorySpecVo> listStock(@PathVariable int factoryId) {
+        LOGGER.info(" listStock factoryId: " + factoryId);
+        Response<FactorySpecVo> response = new Response<>();
+        FactoryEntity entity = mFactoryRepository.findById(factoryId);
+
+        if(entity != null) {
+            response.data = mapSingle(entity, FactorySpecVo.class);
+        } else {
+            response.setStatusCode(ResponseCode.CODE_GOODS_GET_ALL_ERROR);
+        }
+
         return response;
     }
 }
